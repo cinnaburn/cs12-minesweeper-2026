@@ -126,26 +126,28 @@ body{
 .name{font-weight:700}
 .subtitle{font-size:14px}
 
-.window{max-width:420px;margin:30px auto;padding:12px}
-.header{display:flex;justify-content:center;align-items:center;gap:12px;margin-bottom:12px}
-.lcd{background:#000;color:#ff3b30;padding:6px 10px;border-radius:4px;min-width:48px;text-align:center;font-weight:700;font-family:monospace}
-.smiley-btn{font-size:22px;padding:6px 10px;border-radius:6px;border:1px solid rgba(0,0,0,0.1);background:#fff;cursor:pointer}
-.board-container{display:flex;justify-content:center}
-.board{display:grid;gap:6px;background:transparent;padding:6px}
-.cell{width:40px;height:40px;background:#cfcfcf;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:700;cursor:pointer;user-select:none;box-shadow:0 2px 0 rgba(0,0,0,0.08);font-family:monospace}
-.cell.revealed{background:#eee;box-shadow:inset 0 0 0 rgba(0,0,0,0.04)}
-.cell.exploded{background:#f44336;color:#fff}
-.cell.wrong-flag{background:#ffdcdc;color:#900}
-.cell.active{transform:translateY(1px)}
-.val-1{color:blue}
-.val-2{color:green}
-.val-3{color:red}
-.val-4{color:navy}
-.val-5{color:maroon}
-.val-6{color:teal}
-.val-7{color:black}
-.val-8{color:gray}
-.val-5{color:maroon}
-.val-6{color:teal}
-.val-7{color:black}
-.val-8{color:gray}
+.mines-classic{background-color:#008080;min-height:100vh;display:flex;justify-content:center;align-items:center}
+
+.mines-classic .window{background-color:#c0c0c0;padding:6px;display:inline-block}
+.mines-classic .window{border-top:3px solid #ffffff;border-left:3px solid #ffffff;border-right:3px solid #808080;border-bottom:3px solid #808080}
+.mines-classic .header{display:flex;justify-content:space-between;align-items:center;padding:4px 6px;margin-bottom:6px}
+.mines-classic .header{border-top:2px solid #808080;border-left:2px solid #808080;border-right:2px solid #ffffff;border-bottom:2px solid #ffffff}
+.mines-classic .lcd{background-color:#000;color:#ff0000;font-family:'Courier New',Courier,monospace;font-size:24px;font-weight:700;line-height:1;padding:2px;width:48px;text-align:center;letter-spacing:1px}
+.mines-classic .lcd{border-top:2px solid #808080;border-left:2px solid #808080;border-right:2px solid #ffffff;border-bottom:2px solid #ffffff}
+.mines-classic .smiley-btn{width:32px;height:32px;background-color:#c0c0c0;border-top:2px solid #ffffff;border-left:2px solid #ffffff;border-right:2px solid #808080;border-bottom:2px solid #808080;font-size:18px;display:flex;justify-content:center;align-items:center;cursor:pointer;padding:0}
+.mines-classic .smiley-btn:active{border-top:2px solid #808080;border-left:2px solid #808080;border-right:2px solid #ffffff;border-bottom:2px solid #ffffff;padding-top:2px;padding-left:2px}
+.mines-classic .board-container{border-top:3px solid #808080;border-left:3px solid #808080;border-right:3px solid #ffffff;border-bottom:3px solid #ffffff}
+.mines-classic .board{display:grid;background-color:#808080;border-top:1px solid #808080;border-left:1px solid #808080}
+.mines-classic .cell{width:24px;height:24px;background-color:#c0c0c0;border-top:2px solid #ffffff;border-left:2px solid #ffffff;border-right:2px solid #808080;border-bottom:2px solid #808080;box-sizing:border-box;display:flex;justify-content:center;align-items:center;font-size:16px;font-weight:700;cursor:default;position:relative}
+.mines-classic .cell.revealed,.mines-classic .cell.active{border:none;border-right:1px solid #808080;border-bottom:1px solid #808080;background-color:#c0c0c0}
+.mines-classic .cell.exploded{background-color:#ff0000;color:#fff}
+.mines-classic .cell.wrong-flag::after{content:'❌';position:absolute;font-size:12px}
+
+.mines-classic .val-1{color:#0000ff}
+.mines-classic .val-2{color:#008000}
+.mines-classic .val-3{color:#ff0000}
+.mines-classic .val-4{color:#000080}
+.mines-classic .val-5{color:#800000}
+.mines-classic .val-6{color:#008080}
+.mines-classic .val-7{color:#000000}
+.mines-classic .val-8{color:#808080}
