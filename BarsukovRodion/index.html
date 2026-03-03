@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Minesweeper game interface - PR 1" />
+    <title>Minesweeper UI - PR 1</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div class="game">
+    <header class="game-header" aria-label="Game control panel">
+        <div class="header-item header-flags">
+            <span class="label">Flags</span>
+            <output class="value" id="flag-count" aria-live="polite" aria-label="Number of flags">010</output>
+        </div>
+        <button
+                class="header-item header-reset"
+                id="reset-button"
+                type="button"
+                aria-label="Restart game"
+                title="Restart game"
+        >💥</button>
+        <div class="header-item header-timer">
+            <span class="label">Time</span>
+            <output class="value" id="timer" aria-live="polite" aria-label="Time in seconds">000</output>
+        </div>
+    </header>
+
+    <main class="game-main">
+        <div class="board" role="grid" aria-rowcount="9" aria-colcount="9">
+
+            <div class="row" role="row">
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--open" role="gridcell" aria-label="Empty open cell"></div>
+
+                <div class="cell cell--open cell--number-1" role="gridcell" aria-label="Number 1">1</div>
+                <div class="cell cell--open cell--number-2" role="gridcell" aria-label="Number 2">2</div>
+                <div class="cell cell--open cell--number-3" role="gridcell" aria-label="Number 3">3</div>
+                <div class="cell cell--open cell--number-4" role="gridcell" aria-label="Number 4">4</div>
+
+                <div class="cell cell--flag" role="gridcell" tabindex="0" aria-label="Flag"></div>
+                <div class="cell cell--mine" role="gridcell" aria-label="Mine"></div>
+                <div class="cell cell--exploded" role="gridcell" aria-label="Exploded mine"></div>
+            </div>
+
+            <div class="row" role="row">
+                <div class="cell cell--flag-correct" role="gridcell" aria-label="Correct flag"></div>
+                <div class="cell cell--flag-wrong" role="gridcell" aria-label="Wrong flag"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+            </div>
+
+            <div class="row" role="row">
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+            </div>
+
+            <div class="row" role="row">
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+            </div>
+
+            <div class="row" role="row">
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+            </div>
+
+            <div class="row" role="row">
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+            </div>
+
+            <div class="row" role="row">
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+            </div>
+
+            <div class="row" role="row">
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+            </div>
+
+            <div class="row" role="row">
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+                <div class="cell cell--closed" role="gridcell" tabindex="0" aria-label="Closed cell"></div>
+            </div>
+        </div>
+        <div id="game-status" role="status" aria-live="polite" hidden></div>
+        <noscript>JavaScript is required for the game to work.</noscript>
+    </main>
+</div>
+</body>
+</html>
