@@ -12,20 +12,20 @@ single-letter names or cryptic abbreviations.
 
 ### Variable naming
 
-| Avoid | Use instead |
-|-------|-------------|
-| `r` | `row` |
-| `c` | `col` |
-| `nr` | `neighbourRow` |
-| `nc` | `neighbourCol` |
-| `dr` | `directionalRow` |
-| `dc` | `directionalCol` |
-| `i`, `j` (in grid loops) | `row`, `col` |
-| `n` | `count` or a domain-specific name |
-| `el` | `element` |
-| `btn` | `button` |
-| `val` | `value` |
-| `arr` | `array` or a domain-specific name (e.g. `cells`) |
+| Avoid                    | Use instead                                      |
+| ------------------------ | ------------------------------------------------ |
+| `r`                      | `row`                                            |
+| `c`                      | `col`                                            |
+| `nr`                     | `neighbourRow`                                   |
+| `nc`                     | `neighbourCol`                                   |
+| `dr`                     | `directionalRow`                                 |
+| `dc`                     | `directionalCol`                                 |
+| `i`, `j` (in grid loops) | `row`, `col`                                     |
+| `n`                      | `count` or a domain-specific name                |
+| `el`                     | `element`                                        |
+| `btn`                    | `button`                                         |
+| `val`                    | `value`                                          |
+| `arr`                    | `array` or a domain-specific name (e.g. `cells`) |
 
 ### Function naming
 
@@ -112,11 +112,15 @@ const CELL_STATE = {
 };
 
 const DIRECTIONS = [
-  [-1, -1], [-1, 0], [-1, 1],
-  [ 0, -1],          [ 0, 1],
-  [ 1, -1], [ 1, 0], [ 1, 1],
+  [-1, -1],
+  [-1, 0],
+  [-1, 1],
+  [0, -1],
+  [0, 1],
+  [1, -1],
+  [1, 0],
+  [1, 1],
 ];
-
 
 function countAdjacentMines(board, row, col) {
   let mineCount = 0;
@@ -134,7 +138,6 @@ function countAdjacentMines(board, row, col) {
 
   return mineCount;
 }
-
 
 function revealCell(board, row, col) {
   const cell = board[row][col];
@@ -166,3 +169,71 @@ function revealCell(board, row, col) {
 - **No magic numbers** — define numeric constants (e.g. `const DEFAULT_MINE_COUNT = 10`).
 - **Early returns** — use guard clauses to reduce nesting instead of deeply nested `if/else`.
 - **Consistent style** — apply all rules above to every file in the project, not just new code.
+
+---
+
+## Repository Structure
+
+All files submitted by a student must be placed inside a dedicated top-level folder named
+after the student using the `SurnameName` format (e.g. `SmithJohn/`, `MokhNazar/`).
+
+### Rules
+
+- Every new file must reside under `/{SurnameName}/` — never in the repository root or any
+  other folder.
+- The folder name must follow the `SurnameName` convention: surname first, given name second,
+  no separator, each part capitalised (PascalCase).
+- Do not modify files outside your own `/{SurnameName}/` folder.
+
+### Examples
+
+```
+SmithWill/
+  index.html
+  styles.css
+  script.js
+
+DeppJohny/
+  index.html
+  styles.css
+```
+
+---
+
+## Pull Request Conventions
+
+### Title format
+
+Every pull request title must begin with a lab identifier followed by a colon and a space:
+
+```
+lab{number}: <short description>
+```
+
+### Examples
+
+```
+lab1: initial board rendering
+lab2: mine placement logic
+lab3: reveal and flag interactions
+```
+
+### Rules
+
+- `{number}` is a positive integer matching the lab assignment number (e.g. `lab1`, `lab12`).
+- The description after the colon must be lowercase and concise.
+- No PR should be opened without the `lab{number}:` prefix — reviewers will reject titles that
+  do not follow this format.
+
+### Reviewer checks
+
+When reviewing a pull request, verify all of the following before approving:
+
+1. **PR title** starts with `lab{number}: ` as described above.
+2. **All changed files** are inside the author's own `/{SurnameName}/` folder — no files
+   outside that folder should be added, modified, or deleted.
+3. **No top-level directory has been fully deleted.** If the diff shows that every file under
+   a `/{SurnameName}/` folder belonging to _another_ student has been removed, comment this in the PR. This is the most common way a student accidentally wipes a peer's work.
+   - Check the list of deleted files: if all deletions share the same top-level folder and
+     that folder is **not** the PR author's own folder, flag it.
+   - Request changes with a comment explaining which directory was unintentionally deleted and asking the author to restore it before the PR can be merged suggesting the way how to do that.
