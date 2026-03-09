@@ -5,14 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minesweeper UI - Halyna Fomenko</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+      .menu-bar-button {
+        background: none;
+        border: none;
+        padding: 0;
+        margin: 0 4px;
+        font: inherit;
+        cursor: pointer;
+      }
+
+      .menu-bar-button:focus-visible {
+        outline: 2px solid #000000;
+        outline-offset: 2px;
+      }
+    </style>
 </head>
 <body>
 
     <div class="game-container">
-        <div class="menu-bar">
-            <span>Game</span>
-            <span>Options</span>
-            <span>Help</span>
+        <div class="menu-bar" role="menubar">
+            <button type="button" class="menu-bar-button" role="menuitem">Game</button>
+            <button type="button" class="menu-bar-button" role="menuitem">Options</button>
+            <button type="button" class="menu-bar-button" role="menuitem">Help</button>
         </div>
 
         <div class="game-box">
