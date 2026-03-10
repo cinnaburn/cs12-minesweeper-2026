@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Сапер (Чистый CSS)</title>
+    <title>Сапер</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -15,87 +15,95 @@
         </div>
         <div class="board-container">
             <div class="board" id="board">
-                <input type="checkbox" id="c00" class="mine"><label for="c00" class="cell is-mine"><span>💣</span></label>
-                <input type="checkbox" id="c01"><label for="c01" class="cell"><span class="val-1">1</span></label>
-                <input type="checkbox" id="c02"><label for="c02" class="cell"><span></span></label>
-                <input type="checkbox" id="c03"><label for="c03" class="cell"><span></span></label>
-                <input type="checkbox" id="c04"><label for="c04" class="cell"><span></span></label>
-                <input type="checkbox" id="c05"><label for="c05" class="cell"><span></span></label>
-                <input type="checkbox" id="c06"><label for="c06" class="cell"><span></span></label>
-                <input type="checkbox" id="c07"><label for="c07" class="cell"><span class="val-1">1</span></label>
-                <input type="checkbox" id="c08" class="mine"><label for="c08" class="cell is-mine"><span>💣</span></label>
-                <input type="checkbox" id="c10"><label for="c10" class="cell"><span class="val-1">1</span></label>
-                <input type="checkbox" id="c11"><label for="c11" class="cell"><span class="val-1">1</span></label>
-                <input type="checkbox" id="c12"><label for="c12" class="cell"><span></span></label>
-                <input type="checkbox" id="c13"><label for="c13" class="cell"><span></span></label>
-                <input type="checkbox" id="c14"><label for="c14" class="cell"><span></span></label>
-                <input type="checkbox" id="c15"><label for="c15" class="cell"><span></span></label>
-                <input type="checkbox" id="c16"><label for="c16" class="cell"><span></span></label>
-                <input type="checkbox" id="c17"><label for="c17" class="cell"><span class="val-1">1</span></label>
-                <input type="checkbox" id="c18"><label for="c18" class="cell"><span class="val-1">1</span></label>
-                <input type="checkbox" id="c20"><label for="c20" class="cell"><span></span></label>
-                <input type="checkbox" id="c21"><label for="c21" class="cell"><span></span></label>
-                <input type="checkbox" id="c22"><label for="c22" class="cell"><span></span></label>
-                <input type="checkbox" id="c23"><label for="c23" class="cell"><span class="val-1">1</span></label>
-                <input type="checkbox" id="c24"><label for="c24" class="cell"><span class="val-1">1</span></label>
-                <input type="checkbox" id="c25"><label for="c25" class="cell"><span class="val-1">1</span></label>
-                <input type="checkbox" id="c26"><label for="c26" class="cell"><span></span></label>
-                <input type="checkbox" id="c27"><label for="c27" class="cell"><span></span></label>
-                <input type="checkbox" id="c28"><label for="c28" class="cell"><span></span></label>
-                <input type="checkbox" id="c30"><label for="c30" class="cell"><span class="val-1">1</span></label>
-                <input type="checkbox" id="c31"><label for="c31" class="cell"><span class="val-1">1</span></label>
-                <input type="checkbox" id="c32"><label for="c32" class="cell"><span class="val-1">1</span></label>
-                <input type="checkbox" id="c33"><label for="c33" class="cell"><span class="val-1">1</span></label>
-                <input type="checkbox" id="c34" class="mine"><label for="c34" class="cell is-mine"><span>💣</span></label>
-                <input type="checkbox" id="c35"><label for="c35" class="cell"><span class="val-1">1</span></label>
-                <input type="checkbox" id="c36"><label for="c36" class="cell"><span class="val-1">1</span></label>
-                <input type="checkbox" id="c37"><label for="c37" class="cell"><span class="val-1">1</span></label>
-                <input type="checkbox" id="c38"><label for="c38" class="cell"><span class="val-1">1</span></label>
-                <input type="checkbox" id="c40"><label for="c40" class="cell"><span class="val-1">1</span></label>
-                <input type="checkbox" id="c41" class="mine"><label for="c41" class="cell is-mine"><span>💣</span></label>
-                <input type="checkbox" id="c42"><label for="c42" class="cell"><span class="val-1">1</span></label>
-                <input type="checkbox" id="c43"><label for="c43" class="cell"><span class="val-1">1</span></label>
-                <input type="checkbox" id="c44"><label for="c44" class="cell"><span class="val-1">1</span></label>
-                <input type="checkbox" id="c45"><label for="c45" class="cell"><span class="val-1">1</span></label>
-                <input type="checkbox" id="c46"><label for="c46" class="cell"><span class="val-1">1</span></label>
-                <input type="checkbox" id="c47" class="mine"><label for="c47" class="cell is-mine"><span>💣</span></label>
-                <input type="checkbox" id="c48"><label for="c48" class="cell"><span class="val-1">1</span></label>
-                <input type="checkbox" id="c50"><label for="c50" class="cell"><span class="val-2">2</span></label>
-                <input type="checkbox" id="c51"><label for="c51" class="cell"><span class="val-2">2</span></label>
-                <input type="checkbox" id="c52"><label for="c52" class="cell"><span class="val-1">1</span></label>
-                <input type="checkbox" id="c53"><label for="c53" class="cell"><span></span></label>
-                <input type="checkbox" id="c54"><label for="c54" class="cell"><span></span></label>
-                <input type="checkbox" id="c55"><label for="c55" class="cell"><span></span></label>
-                <input type="checkbox" id="c56"><label for="c56" class="cell"><span class="val-1">1</span></label>
-                <input type="checkbox" id="c57"><label for="c57" class="cell"><span class="val-2">2</span></label>
-                <input type="checkbox" id="c58"><label for="c58" class="cell"><span class="val-2">2</span></label>
-                <input type="checkbox" id="c60" class="mine"><label for="c60" class="cell is-mine"><span>💣</span></label>
-                <input type="checkbox" id="c61"><label for="c61" class="cell"><span class="val-2">2</span></label>
-                <input type="checkbox" id="c62"><label for="c62" class="cell"><span></span></label>
-                <input type="checkbox" id="c63"><label for="c63" class="cell"><span></span></label>
-                <input type="checkbox" id="c64"><label for="c64" class="cell"><span></span></label>
-                <input type="checkbox" id="c65"><label for="c65" class="cell"><span></span></label>
-                <input type="checkbox" id="c66"><label for="c66" class="cell"><span></span></label>
-                <input type="checkbox" id="c67"><label for="c67" class="cell"><span class="val-1">1</span></label>
-                <input type="checkbox" id="c68" class="mine"><label for="c68" class="cell is-mine"><span>💣</span></label>
-                <input type="checkbox" id="c70"><label for="c70" class="cell"><span class="val-3">3</span></label>
-                <input type="checkbox" id="c71"><label for="c71" class="cell"><span class="val-3">3</span></label>
-                <input type="checkbox" id="c72"><label for="c72" class="cell"><span class="val-1">1</span></label>
-                <input type="checkbox" id="c73"><label for="c73" class="cell"><span></span></label>
-                <input type="checkbox" id="c74"><label for="c74" class="cell"><span class="val-1">1</span></label>
-                <input type="checkbox" id="c75"><label for="c75" class="cell"><span class="val-1">1</span></label>
-                <input type="checkbox" id="c76"><label for="c76" class="cell"><span class="val-1">1</span></label>
-                <input type="checkbox" id="c77"><label for="c77" class="cell"><span class="val-1">1</span></label>
-                <input type="checkbox" id="c78"><label for="c78" class="cell"><span class="val-1">1</span></label>
-                <input type="checkbox" id="c80" class="mine"><label for="c80" class="cell is-mine"><span>💣</span></label>
-                <input type="checkbox" id="c81" class="mine"><label for="c81" class="cell is-mine"><span>💣</span></label>
-                <input type="checkbox" id="c82"><label for="c82" class="cell"><span class="val-1">1</span></label>
-                <input type="checkbox" id="c83"><label for="c83" class="cell"><span></span></label>
-                <input type="checkbox" id="c84"><label for="c84" class="cell"><span class="val-1">1</span></label>
-                <input type="checkbox" id="c85" class="mine"><label for="c85" class="cell is-mine"><span>💣</span></label>
-                <input type="checkbox" id="c86"><label for="c86" class="cell"><span class="val-1">1</span></label>
-                <input type="checkbox" id="c87"><label for="c87" class="cell"><span></span></label>
-                <input type="checkbox" id="c88"><label for="c88" class="cell"><span></span></label>
+                <button class="cell mine" type="button"><span>💣</span></button>
+                <button class="cell" type="button"><span class="val-1">1</span></button>
+                <button class="cell" type="button"><span></span></button>
+                <button class="cell" type="button"><span></span></button>
+                <button class="cell" type="button"><span></span></button>
+                <button class="cell" type="button"><span></span></button>
+                <button class="cell" type="button"><span></span></button>
+                <button class="cell" type="button"><span class="val-1">1</span></button>
+                <button class="cell mine" type="button"><span>💣</span></button>
+
+                <button class="cell" type="button"><span class="val-1">1</span></button>
+                <button class="cell" type="button"><span class="val-1">1</span></button>
+                <button class="cell" type="button"><span></span></button>
+                <button class="cell" type="button"><span></span></button>
+                <button class="cell" type="button"><span></span></button>
+                <button class="cell" type="button"><span></span></button>
+                <button class="cell" type="button"><span></span></button>
+                <button class="cell" type="button"><span class="val-1">1</span></button>
+                <button class="cell" type="button"><span class="val-1">1</span></button>
+
+                <button class="cell" type="button"><span></span></button>
+                <button class="cell" type="button"><span></span></button>
+                <button class="cell" type="button"><span></span></button>
+                <button class="cell" type="button"><span class="val-1">1</span></button>
+                <button class="cell" type="button"><span class="val-1">1</span></button>
+                <button class="cell" type="button"><span class="val-1">1</span></button>
+                <button class="cell" type="button"><span></span></button>
+                <button class="cell" type="button"><span></span></button>
+                <button class="cell" type="button"><span></span></button>
+
+                <button class="cell" type="button"><span class="val-1">1</span></button>
+                <button class="cell" type="button"><span class="val-1">1</span></button>
+                <button class="cell" type="button"><span class="val-1">1</span></button>
+                <button class="cell" type="button"><span class="val-1">1</span></button>
+                <button class="cell mine" type="button"><span>💣</span></button>
+                <button class="cell" type="button"><span class="val-1">1</span></button>
+                <button class="cell" type="button"><span class="val-1">1</span></button>
+                <button class="cell" type="button"><span class="val-1">1</span></button>
+                <button class="cell" type="button"><span class="val-1">1</span></button>
+
+                <button class="cell" type="button"><span class="val-1">1</span></button>
+                <button class="cell mine" type="button"><span>💣</span></button>
+                <button class="cell" type="button"><span class="val-1">1</span></button>
+                <button class="cell" type="button"><span class="val-1">1</span></button>
+                <button class="cell" type="button"><span class="val-1">1</span></button>
+                <button class="cell" type="button"><span class="val-1">1</span></button>
+                <button class="cell" type="button"><span class="val-1">1</span></button>
+                <button class="cell mine" type="button"><span>💣</span></button>
+                <button class="cell" type="button"><span class="val-1">1</span></button>
+
+                <button class="cell" type="button"><span class="val-2">2</span></button>
+                <button class="cell" type="button"><span class="val-2">2</span></button>
+                <button class="cell" type="button"><span class="val-1">1</span></button>
+                <button class="cell" type="button"><span></span></button>
+                <button class="cell" type="button"><span></span></button>
+                <button class="cell" type="button"><span></span></button>
+                <button class="cell" type="button"><span class="val-1">1</span></button>
+                <button class="cell" type="button"><span class="val-2">2</span></button>
+                <button class="cell" type="button"><span class="val-2">2</span></button>
+
+                <button class="cell mine" type="button"><span>💣</span></button>
+                <button class="cell" type="button"><span class="val-2">2</span></button>
+                <button class="cell" type="button"><span></span></button>
+                <button class="cell" type="button"><span></span></button>
+                <button class="cell" type="button"><span></span></button>
+                <button class="cell" type="button"><span></span></button>
+                <button class="cell" type="button"><span></span></button>
+                <button class="cell" type="button"><span class="val-1">1</span></button>
+                <button class="cell mine" type="button"><span>💣</span></button>
+
+                <button class="cell" type="button"><span class="val-3">3</span></button>
+                <button class="cell" type="button"><span class="val-3">3</span></button>
+                <button class="cell" type="button"><span class="val-1">1</span></button>
+                <button class="cell" type="button"><span></span></button>
+                <button class="cell" type="button"><span class="val-1">1</span></button>
+                <button class="cell" type="button"><span class="val-1">1</span></button>
+                <button class="cell" type="button"><span class="val-1">1</span></button>
+                <button class="cell" type="button"><span class="val-1">1</span></button>
+                <button class="cell" type="button"><span class="val-1">1</span></button>
+
+                <button class="cell mine" type="button"><span>💣</span></button>
+                <button class="cell mine" type="button"><span>💣</span></button>
+                <button class="cell" type="button"><span class="val-1">1</span></button>
+                <button class="cell" type="button"><span></span></button>
+                <button class="cell" type="button"><span class="val-1">1</span></button>
+                <button class="cell mine" type="button"><span>💣</span></button>
+                <button class="cell" type="button"><span class="val-1">1</span></button>
+                <button class="cell" type="button"><span></span></button>
+                <button class="cell" type="button"><span></span></button>
             </div>
         </div>
     </div>
