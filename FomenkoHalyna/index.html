@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minesweeper UI - Halyna Fomenko</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="game-container">
+        <div class="menu-bar" role="menubar">
+            <button type="button" class="menu-bar-button" role="menuitem">Game</button>
+            <button type="button" class="menu-bar-button" role="menuitem">Options</button>
+            <button type="button" class="menu-bar-button" role="menuitem">Help</button>
+        </div>
+
+        <div class="game-box">
+            <header class="status-panel">
+                <div class="counter">010</div>
+                <button class="reset-button" type="button" aria-label="Reset game">😊</button>
+                <div class="counter">000</div>
+            </header>
+
+            <main class="game-grid">
+                <button type="button" class="cell open n1">1</button>
+                <button type="button" class="cell open n1">1</button>
+                <button type="button" class="cell open"></button>
+                <button type="button" class="cell open"></button>
+                <button type="button" class="cell open"></button>
+                <button type="button" class="cell flag" aria-label="Flagged"></button>
+                <button type="button" class="cell mine" aria-label="Mine"></button>
+                <button type="button" class="cell mine-exploded" aria-label="Exploded mine"></button>
+                <button type="button" class="cell open n2">2</button>
+                <button type="button" class="cell"></button>
+                <button type="button" class="cell"></button>
+                <button type="button" class="cell"></button>
+                <button type="button" class="cell"></button>
+                <button type="button" class="cell"></button>
+                <button type="button" class="cell"></button>
+            </main>
+        </div>
+    </div>
+
+</body>
+</html>
