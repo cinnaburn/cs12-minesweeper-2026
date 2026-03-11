@@ -172,6 +172,43 @@ function revealCell(board, row, col) {
 
 ---
 
+## Repository Access and Forking
+
+Students must have **direct write access** to this repository to push branches and open pull
+requests. Do **not** fork the repository — pull requests from forks cannot be merged into the
+main workflow.
+
+### If you see a "You must fork this repository" message
+
+This means your GitHub account has not been granted access yet. To get access:
+
+1. Find the Google Sheets table for your group:
+   **[Course roster](https://docs.google.com/spreadsheets/d/1Up05qqrfg1q-oXC5eijNRJ7oyswjdmDAWxUUk_MsBIg/edit?gid=0#gid=0)**
+   — each group has a dedicated page (tab).
+2. Add your **GitHub username (nickname)** to your row in the table.
+3. Wait for the teacher to grant access — you will receive a GitHub invitation by email.
+4. Accept the invitation and then clone the repository directly (no fork needed).
+
+### Reviewer checks for forked PRs
+
+If a pull request originates from a **fork** (the head repository is different from the base
+repository), do **not** approve or merge it. Leave a `REQUEST_CHANGES` review with the
+following guidance:
+
+> It looks like this PR was opened from a fork. In this course we work directly in the shared
+> repository, so fork-based PRs cannot be merged. Here's what to do:
+>
+> 1. Make sure your GitHub username is listed in the
+>    [course roster spreadsheet](https://docs.google.com/spreadsheets/d/1Up05qqrfg1q-oXC5eijNRJ7oyswjdmDAWxUUk_MsBIg/edit?gid=0#gid=0)
+>    on your group's page.
+> 2. Once the teacher grants access and you accept the invitation, clone the main repo,
+>    recreate your branch there, and open a new PR from that branch.
+>
+> No need to redo your work — just copy your files into the new branch. Feel free to ask if
+> you need help!
+
+---
+
 ## Repository Structure
 
 All files submitted by a student must be placed inside a dedicated top-level folder named
@@ -237,3 +274,9 @@ When reviewing a pull request, verify all of the following before approving:
    - Check the list of deleted files: if all deletions share the same top-level folder and
      that folder is **not** the PR author's own folder, flag it.
    - Request changes with a comment explaining which directory was unintentionally deleted and asking the author to restore it before the PR can be merged suggesting the way how to do that.
+4. **lab1 — No JavaScript allowed.** If the PR title **or** the head branch name contains
+   `lab1`, check that no `.js` files are added or modified and that no `<script>` tags appear
+   in any HTML file.
+   - If any JavaScript is found, request changes with a comment explaining that lab1 must be
+     completed using HTML and CSS only, and that all `.js` files and `<script>` tags must be
+     removed before the PR can be merged.

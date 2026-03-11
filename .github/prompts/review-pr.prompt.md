@@ -5,17 +5,60 @@ with an overview body and inline comments. Mark everything as `[AI Generated]`.
 
 ---
 
-## Step 1 — Discover the repository remote
+## Tone and Communication Style
+
+Write every review comment as a **friendly but honest teacher**:
+
+- **For requirement violations** (wrong folder structure, JavaScript in lab1, deleted peer
+  folders, missing `lab{number}:` prefix, etc.) — be **direct and unambiguous**. State clearly
+  what rule was broken, why it matters, and exactly what must be fixed. Do not soften the
+  message to the point where the student might miss the severity.
+- **For everything else** (code quality, naming, structure, suggestions) — be **warm,
+  encouraging, and explanatory**. Assume good intent. Explain _why_ a practice is better, not
+  just _what_ to change. Acknowledge what the student did well before listing improvements.
+- Never be harsh or discouraging. Even when requesting changes on a violation, end with a
+  constructive next step so the student knows exactly how to proceed.
+
+### Examples
+
+> ❌ Too cold: _"Naming is wrong."_
+> ✅ Good: _"Great start! One thing to improve: variable names like `r` and `c` make the code
+> harder to read at a glance. Renaming them to `row` and `col` will make your intent instantly
+> clear to anyone reading the code — including future you!"_
+
+> ❌ Too soft for a violation: _"You might want to consider not including JS files."_
+> ✅ Good: _"🔴 **lab1 requires HTML and CSS only — no JavaScript.** The file `script.js` must
+> be removed before this PR can be merged. lab1 is specifically designed to practise pure HTML
+> structure and CSS styling. Please delete the file, update html and push again."_
+
+---
+
+## Step 1 — Switch to the PR branch
+
+Fetch the latest refs from origin, then check out the PR branch so the local working tree
+reflects the exact state of the PR:
+
+```bash
+git fetch origin
+gh pr checkout {pr_number}
+git pull origin
+```
+
+This ensures all files read from disk during the review are up to date with the remote.
+
+---
+
+## Step 2 — Discover the repository remote
 
 ```bash
 git remote -v
 ```
 
-Extract the `owner` and `repo` from the remote URL (e.g. `cs1-web-course-2026` / `cs12-minesweeper-2026`).
+Extract the `owner` and `repo` from the remote URL (e.g. `cs1-web-course-2026` / `cs11-minesweeper-2026`).
 
 ---
 
-## Step 2 — Fetch PR metadata and diff
+## Step 3 — Fetch PR metadata and diff
 
 Use the GitHub API (or `gh` CLI / MCP tools) to retrieve in parallel:
 
@@ -31,7 +74,7 @@ gh api /repos/{owner}/{repo}/pulls/{pr_number} --header "Accept: application/vnd
 
 ---
 
-## Step 3 — Review the diff against project conventions
+## Step 4 — Review the diff against project conventions
 
 Check every finding from the list below. Only report issues that are genuinely
 impactful — bugs, accessibility failures, structural violations, logic errors.
@@ -41,7 +84,7 @@ Follow `copilot-instructions.md`
 
 ---
 
-## Step 4 — Build the review payload
+## Step 5 — Build the review payload
 
 Compose a JSON payload with the following structure:
 
@@ -109,7 +152,7 @@ Severity scale:
 
 ---
 
-## Step 5 — Post the review via `gh api`
+## Step 6 — Post the review via `gh api`
 
 ```bash
 gh api \
@@ -129,7 +172,7 @@ gh api /repos/{owner}/{repo}/pulls/{pr_number}/reviews/{review_id}/comments \
 
 ---
 
-## Step 6 — Report back to the user
+## Step 7 — Report back to the user
 
 Summarise:
 
