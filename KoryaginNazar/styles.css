@@ -21,7 +21,7 @@ body {
   box-shadow: inset -2px -2px 0 #ffffff, inset 2px 2px 0 #8f8f8f;
 }
 
-.icon-btn {
+.icon-button {
   width: 34px;
   height: 34px;
   border: 2px solid #8f8f8f;
@@ -31,7 +31,7 @@ body {
   padding: 0;
 }
 
-.icon-btn svg {
+.icon-button svg {
   width: 20px;
   height: 20px;
 }
