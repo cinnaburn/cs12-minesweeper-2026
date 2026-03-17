@@ -4,6 +4,24 @@ const DEFAULT_CONFIG = {
     minesCount: 10
 };
 
+const CELL_TYPE = {
+    EMPTY: 'empty',
+    MINE: 'mine',
+};
+
+const CELL_STATE = {
+    CLOSED: 'closed',
+    OPENED: 'opened',
+    FLAGGED: 'flagged',
+};
+
+const GAME_STATUS = {
+    PROCESS: 'process',
+    WIN: 'win',
+    LOSE: 'lose',
+};
+
+
 function createCell() {
     return {
         type: 'empty',
@@ -14,60 +32,64 @@ function createCell() {
     };
 }
 
+
 function createEmptyGrid(rows, cols) {
     const result = [];
-    for (let r = 0; r < rows; r++) {
-        const row = [];
-        for (let c = 0; c < cols; c++) {
-            row.push(createCell());
-        }
-        result.push(row);
+    for (let row = 0; row < rows; row++) {
+    const currentRow = [];
+    for (let col = 0; col < cols; col++) {
+        currentRow.push(createCell());
     }
-    return result;
+    result.push(currentRow);
 }
+}
+
 
 function inBounds(rows, cols, row, col) {
     return row >= 0 && row < rows && col >= 0 && col < cols;
 }
 
+
 function placeMines(grid, rows, cols, minesCount, excludeRow, excludeCol) {
     let minesPlaced = 0;
 
     while (minesPlaced < minesCount) {
-        const r = Math.floor(Math.random() * rows);
-        const c = Math.floor(Math.random() * cols);
+        const row = Math.floor(Math.random() * rows);
+        const col = Math.floor(Math.random() * cols);
 
-        const isExcluded = Math.abs(r - excludeRow) <= 1 && Math.abs(c - excludeCol) <= 1;
-        if (grid[r][c].type !== 'mine' && !isExcluded) {
-            grid[r][c].type = 'mine';
+        const isExcluded = Math.abs(row - excludeRow) <= 1 && Math.abs(col - excludeCol) <= 1;
+        if (grid[row][col].type !== 'mine' && !isExcluded) {
+            grid[row][col].type = 'mine';
             minesPlaced++;
         }
     }
 }
 
+
 function countNeighbourMines(grid, rows, cols) {
-    for (let r = 0; r < rows; r++) {
-        for (let c = 0; c < cols; c++) {
-            if (grid[r][c].type === 'mine') {
+    for (let row = 0; row < rows; row++) {
+        for (let col = 0; col < cols; col++) {
+            if (grid[row][col].type === 'mine') {
                 continue;
             }
 
             let count = 0;
-            for (let i = -1; i <= 1; i++) {
-                for (let j = -1; j <= 1; j++) {
-                    const nr = r + i;
-                    const nc = c + j;
-
-                    if (inBounds(rows, cols, nr, nc) && grid[nr][nc].type === 'mine') {
-                        count++;
-                    }
-                }
-            }
-
-            grid[r][c].neighborMines = count;
+            for (let directionalRow = -1; directionalRow <= 1; directionalRow++) {
+                for (let directionalCol = -1; directionalCol <= 1; directionalCol++) {
+                    const neighbourRow = row + directionalRow;
+                    const neighbourCol = col + directionalCol;
+                    if (inBounds(rows, cols, neighbourRow, neighbourCol) &&
+                        grid[neighbourRow][neighbourCol].type === CELL_TYPE.MINE) {
+            count++;
         }
     }
 }
+
+            grid[row][col].neighborMines = count;
+        }
+    }
+}
+
 
 function createGame(customConfig = {}) {
     const config = { ...DEFAULT_CONFIG, ...customConfig };
@@ -85,7 +107,9 @@ function createGame(customConfig = {}) {
         timerId: null
     };
 
+
     let grid = createEmptyGrid(gameState.rows, gameState.cols);
+
 
     function resetCellsState() {
         if (gameState.timerId) {
@@ -101,6 +125,7 @@ function createGame(customConfig = {}) {
         grid = createEmptyGrid(gameState.rows, gameState.cols);
     }
 
+
     function generateField(excludeRow = -1, excludeCol = -1) {
         grid = createEmptyGrid(gameState.rows, gameState.cols);
         placeMines(
@@ -113,6 +138,7 @@ function createGame(customConfig = {}) {
         );
         countNeighbourMines(grid, gameState.rows, gameState.cols);
     }
+
 
     function revealAllMines() {
         for (let r = 0; r < gameState.rows; r++) {
@@ -129,6 +155,7 @@ function createGame(customConfig = {}) {
         }
     }
 
+
     function flagAllMines() {
         for (let r = 0; r < gameState.rows; r++) {
             for (let c = 0; c < gameState.cols; c++) {
@@ -141,6 +168,7 @@ function createGame(customConfig = {}) {
         }
     }
 
+
     function checkWinCondition() {
         const totalSafeCells = (gameState.rows * gameState.cols) - gameState.minesCount;
         if (gameState.openedCells === totalSafeCells) {
@@ -152,6 +180,7 @@ function createGame(customConfig = {}) {
             flagAllMines();
         }
     }
+
 
     function floodOpen(row, col) {
         if (!inBounds(gameState.rows, gameState.cols, row, col)) {
@@ -183,6 +212,7 @@ function createGame(customConfig = {}) {
         }
     }
 
+
     function openCell(row, col) {
         if (gameState.status !== 'process') {
             return false;
@@ -192,12 +222,9 @@ function createGame(customConfig = {}) {
         }
 
         if (gameState.firstClick) {
-            gameState.firstClick = false;
-            gameState.started = true;
-            generateField(row, col);
-            gameState.timerId = setInterval(() => {
-                tick();
-            }, 1000);
+        gameState.firstClick = false;
+        gameState.started = true;
+        generateField(row, col);
         }
 
         const cell = grid[row][col];
@@ -220,6 +247,7 @@ function createGame(customConfig = {}) {
         checkWinCondition();
         return true;
     }
+
 
     function toggleFlag(row, col) {
         if (gameState.status !== 'process') {
@@ -249,6 +277,7 @@ function createGame(customConfig = {}) {
         return false;
     }
 
+
     function tick(seconds = 1) {
         if (gameState.status !== 'process' || !gameState.started) {
             return gameState.gameTime;
@@ -259,9 +288,11 @@ function createGame(customConfig = {}) {
         return gameState.gameTime;
     }
 
+
     function getMinesLeft() {
         return gameState.minesCount - gameState.flagsCount;
     }
+
 
     function getState() {
         return {
@@ -270,16 +301,20 @@ function createGame(customConfig = {}) {
         };
     }
 
+
     function getGrid() {
         return grid.map((row) => row.map((cell) => ({ ...cell })));
     }
+
 
     function initGame() {
         resetCellsState();
         return getState();
     }
 
+
     initGame();
+
 
     return {
         initGame,
@@ -292,11 +327,13 @@ function createGame(customConfig = {}) {
     };
 }
 
+
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
         createGame
     };
 }
+
 
 if (typeof window !== 'undefined') {
     window.MinesweeperLogic = {
