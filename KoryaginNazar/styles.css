@@ -3,9 +3,12 @@ body {
     justify-content: center;
 }
 
-.minesweeper {
+* {
   box-sizing: border-box;
-  width: calc((40px * 10) + 4px + (10px * 2) + (3px * 2));
+}
+
+.minesweeper {
+  width: 430px;
   padding: 10px;
   border: 3px solid #bdbdbd;
   background: #c0c0c0;
@@ -61,8 +64,7 @@ body {
 }
 
 .playing-field {
-  box-sizing: border-box;
-  width: calc((40px * 10) + 4px);
+  width: 404px;
   border: 2px solid #8b8b8b;
   background: #bdbdbd;
   box-shadow: inset -2px -2px 0 #ffffff, inset 2px 2px 0 #8f8f8f;
@@ -70,6 +72,7 @@ body {
 
 .board-row {
   display: flex;
+  flex-wrap: nowrap;
 }
 
 .board-row > button {
