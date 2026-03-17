@@ -81,12 +81,17 @@ function createGame(customConfig = {}) {
         flagsCount: 0,
         openedCells: 0,
         firstClick: true,
-        started: false
+        started: false,
+        timerId: null
     };
 
     let grid = createEmptyGrid(gameState.rows, gameState.cols);
 
     function resetCellsState() {
+        if (gameState.timerId) {
+            clearInterval(gameState.timerId);
+            gameState.timerId = null;
+        }
         gameState.status = 'process';
         gameState.gameTime = 0;
         gameState.flagsCount = 0;
@@ -140,39 +145,40 @@ function createGame(customConfig = {}) {
         const totalSafeCells = (gameState.rows * gameState.cols) - gameState.minesCount;
         if (gameState.openedCells === totalSafeCells) {
             gameState.status = 'win';
+            if (gameState.timerId) {
+                clearInterval(gameState.timerId);
+                gameState.timerId = null;
+            }
             flagAllMines();
         }
     }
 
-    function floodOpen(startRow, startCol) {
-        const stack = [[startRow, startCol]];
+    function floodOpen(row, col) {
+        if (!inBounds(gameState.rows, gameState.cols, row, col)) {
+            return;
+        }
 
-        while (stack.length > 0) {
-            const [row, col] = stack.pop();
-            if (!inBounds(gameState.rows, gameState.cols, row, col)) {
-                continue;
-            }
+        const cell = grid[row][col];
+        if (cell.state === 'opened' || cell.state === 'flagged') {
+            return;
+        }
+        if (cell.type === 'mine') {
+            return;
+        }
 
-            const cell = grid[row][col];
-            if (cell.state === 'opened' || cell.state === 'flagged') {
-                continue;
-            }
-            if (cell.type === 'mine') {
-                continue;
-            }
+        cell.state = 'opened';
+        gameState.openedCells++;
 
-            cell.state = 'opened';
-            gameState.openedCells++;
+        if (cell.neighborMines !== 0) {
+            return;
+        }
 
-            if (cell.neighborMines === 0) {
-                for (let i = -1; i <= 1; i++) {
-                    for (let j = -1; j <= 1; j++) {
-                        if (i === 0 && j === 0) {
-                            continue;
-                        }
-                        stack.push([row + i, col + j]);
-                    }
+        for (let i = -1; i <= 1; i++) {
+            for (let j = -1; j <= 1; j++) {
+                if (i === 0 && j === 0) {
+                    continue;
                 }
+                floodOpen(row + i, col + j);
             }
         }
     }
@@ -189,6 +195,9 @@ function createGame(customConfig = {}) {
             gameState.firstClick = false;
             gameState.started = true;
             generateField(row, col);
+            gameState.timerId = setInterval(() => {
+                tick();
+            }, 1000);
         }
 
         const cell = grid[row][col];
@@ -199,6 +208,10 @@ function createGame(customConfig = {}) {
         if (cell.type === 'mine') {
             cell.exploded = true;
             gameState.status = 'lose';
+            if (gameState.timerId) {
+                clearInterval(gameState.timerId);
+                gameState.timerId = null;
+            }
             revealAllMines();
             return true;
         }
