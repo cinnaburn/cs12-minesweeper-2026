@@ -9,101 +9,101 @@
 <body>
     <div class="window">
         <div class="header">
-            <div class="lcd" id="mines-counter">010</div>
-            <a href="" class="smiley-btn" id="smiley-btn">🙂</a>
-            <div class="lcd" id="timer">000</div>
+            <div class="lcd" id="mines-counter" aria-label="Mines remaining: 010">010</div>
+            <a href="" class="smiley-btn" id="smiley-btn" aria-label="New game">🙂</a>
+            <div class="lcd" id="timer" aria-label="Time elapsed: 000">000</div>
         </div>
         <div class="board-container">
-            <div class="board" id="board">
-                <button class="cell mine" type="button"><span>💣</span></button>
-                <button class="cell" type="button"><span class="val-1">1</span></button>
-                <button class="cell" type="button"><span></span></button>
-                <button class="cell" type="button"><span></span></button>
-                <button class="cell" type="button"><span></span></button>
-                <button class="cell" type="button"><span></span></button>
-                <button class="cell" type="button"><span></span></button>
-                <button class="cell" type="button"><span class="val-1">1</span></button>
-                <button class="cell mine" type="button"><span>💣</span></button>
+            <div class="board" id="board" role="grid" aria-label="Minesweeper board">
+                <button class="cell mine" type="button" aria-label="Row 1, Column 1: mine"><span>💣</span></button>
+                <button class="cell" type="button" aria-label="Row 1, Column 2: 1 adjacent mine"><span class="val-1">1</span></button>
+                <button class="cell" type="button" aria-label="Row 1, Column 3: empty"><span></span></button>
+                <button class="cell" type="button" aria-label="Row 1, Column 4: empty"><span></span></button>
+                <button class="cell" type="button" aria-label="Row 1, Column 5: empty"><span></span></button>
+                <button class="cell" type="button" aria-label="Row 1, Column 6: empty"><span></span></button>
+                <button class="cell" type="button" aria-label="Row 1, Column 7: empty"><span></span></button>
+                <button class="cell" type="button" aria-label="Row 1, Column 8: 1 adjacent mine"><span class="val-1">1</span></button>
+                <button class="cell mine" type="button" aria-label="Row 1, Column 9: mine"><span>💣</span></button>
 
-                <button class="cell" type="button"><span class="val-1">1</span></button>
-                <button class="cell" type="button"><span class="val-1">1</span></button>
-                <button class="cell" type="button"><span></span></button>
-                <button class="cell" type="button"><span></span></button>
-                <button class="cell" type="button"><span></span></button>
-                <button class="cell" type="button"><span></span></button>
-                <button class="cell" type="button"><span></span></button>
-                <button class="cell" type="button"><span class="val-1">1</span></button>
-                <button class="cell" type="button"><span class="val-1">1</span></button>
+                <button class="cell" type="button" aria-label="Row 2, Column 1: 1 adjacent mine"><span class="val-1">1</span></button>
+                <button class="cell" type="button" aria-label="Row 2, Column 2: 1 adjacent mine"><span class="val-1">1</span></button>
+                <button class="cell" type="button" aria-label="Row 2, Column 3: empty"><span></span></button>
+                <button class="cell" type="button" aria-label="Row 2, Column 4: empty"><span></span></button>
+                <button class="cell" type="button" aria-label="Row 2, Column 5: empty"><span></span></button>
+                <button class="cell" type="button" aria-label="Row 2, Column 6: empty"><span></span></button>
+                <button class="cell" type="button" aria-label="Row 2, Column 7: empty"><span></span></button>
+                <button class="cell" type="button" aria-label="Row 2, Column 8: 1 adjacent mine"><span class="val-1">1</span></button>
+                <button class="cell" type="button" aria-label="Row 2, Column 9: 1 adjacent mine"><span class="val-1">1</span></button>
 
-                <button class="cell" type="button"><span></span></button>
-                <button class="cell" type="button"><span></span></button>
-                <button class="cell" type="button"><span></span></button>
-                <button class="cell" type="button"><span class="val-1">1</span></button>
-                <button class="cell" type="button"><span class="val-1">1</span></button>
-                <button class="cell" type="button"><span class="val-1">1</span></button>
-                <button class="cell" type="button"><span></span></button>
-                <button class="cell" type="button"><span></span></button>
-                <button class="cell" type="button"><span></span></button>
+                <button class="cell" type="button" aria-label="Row 3, Column 1: empty"><span></span></button>
+                <button class="cell" type="button" aria-label="Row 3, Column 2: empty"><span></span></button>
+                <button class="cell" type="button" aria-label="Row 3, Column 3: empty"><span></span></button>
+                <button class="cell" type="button" aria-label="Row 3, Column 4: 1 adjacent mine"><span class="val-1">1</span></button>
+                <button class="cell" type="button" aria-label="Row 3, Column 5: 1 adjacent mine"><span class="val-1">1</span></button>
+                <button class="cell" type="button" aria-label="Row 3, Column 6: 1 adjacent mine"><span class="val-1">1</span></button>
+                <button class="cell" type="button" aria-label="Row 3, Column 7: empty"><span></span></button>
+                <button class="cell" type="button" aria-label="Row 3, Column 8: empty"><span></span></button>
+                <button class="cell" type="button" aria-label="Row 3, Column 9: empty"><span></span></button>
 
-                <button class="cell" type="button"><span class="val-1">1</span></button>
-                <button class="cell" type="button"><span class="val-1">1</span></button>
-                <button class="cell" type="button"><span class="val-1">1</span></button>
-                <button class="cell" type="button"><span class="val-1">1</span></button>
-                <button class="cell mine" type="button"><span>💣</span></button>
-                <button class="cell" type="button"><span class="val-1">1</span></button>
-                <button class="cell" type="button"><span class="val-1">1</span></button>
-                <button class="cell" type="button"><span class="val-1">1</span></button>
-                <button class="cell" type="button"><span class="val-1">1</span></button>
+                <button class="cell" type="button" aria-label="Row 4, Column 1: 1 adjacent mine"><span class="val-1">1</span></button>
+                <button class="cell" type="button" aria-label="Row 4, Column 2: 1 adjacent mine"><span class="val-1">1</span></button>
+                <button class="cell" type="button" aria-label="Row 4, Column 3: 1 adjacent mine"><span class="val-1">1</span></button>
+                <button class="cell" type="button" aria-label="Row 4, Column 4: 1 adjacent mine"><span class="val-1">1</span></button>
+                <button class="cell mine" type="button" aria-label="Row 4, Column 5: mine"><span>💣</span></button>
+                <button class="cell" type="button" aria-label="Row 4, Column 6: 1 adjacent mine"><span class="val-1">1</span></button>
+                <button class="cell" type="button" aria-label="Row 4, Column 7: 1 adjacent mine"><span class="val-1">1</span></button>
+                <button class="cell" type="button" aria-label="Row 4, Column 8: 1 adjacent mine"><span class="val-1">1</span></button>
+                <button class="cell" type="button" aria-label="Row 4, Column 9: 1 adjacent mine"><span class="val-1">1</span></button>
 
-                <button class="cell" type="button"><span class="val-1">1</span></button>
-                <button class="cell mine" type="button"><span>💣</span></button>
-                <button class="cell" type="button"><span class="val-1">1</span></button>
-                <button class="cell" type="button"><span class="val-1">1</span></button>
-                <button class="cell" type="button"><span class="val-1">1</span></button>
-                <button class="cell" type="button"><span class="val-1">1</span></button>
-                <button class="cell" type="button"><span class="val-1">1</span></button>
-                <button class="cell mine" type="button"><span>💣</span></button>
-                <button class="cell" type="button"><span class="val-1">1</span></button>
+                <button class="cell" type="button" aria-label="Row 5, Column 1: 1 adjacent mine"><span class="val-1">1</span></button>
+                <button class="cell mine" type="button" aria-label="Row 5, Column 2: mine"><span>💣</span></button>
+                <button class="cell" type="button" aria-label="Row 5, Column 3: 1 adjacent mine"><span class="val-1">1</span></button>
+                <button class="cell" type="button" aria-label="Row 5, Column 4: 1 adjacent mine"><span class="val-1">1</span></button>
+                <button class="cell" type="button" aria-label="Row 5, Column 5: 1 adjacent mine"><span class="val-1">1</span></button>
+                <button class="cell" type="button" aria-label="Row 5, Column 6: 1 adjacent mine"><span class="val-1">1</span></button>
+                <button class="cell" type="button" aria-label="Row 5, Column 7: 1 adjacent mine"><span class="val-1">1</span></button>
+                <button class="cell mine" type="button" aria-label="Row 5, Column 8: mine"><span>💣</span></button>
+                <button class="cell" type="button" aria-label="Row 5, Column 9: 1 adjacent mine"><span class="val-1">1</span></button>
 
-                <button class="cell" type="button"><span class="val-2">2</span></button>
-                <button class="cell" type="button"><span class="val-2">2</span></button>
-                <button class="cell" type="button"><span class="val-1">1</span></button>
-                <button class="cell" type="button"><span></span></button>
-                <button class="cell" type="button"><span></span></button>
-                <button class="cell" type="button"><span></span></button>
-                <button class="cell" type="button"><span class="val-1">1</span></button>
-                <button class="cell" type="button"><span class="val-2">2</span></button>
-                <button class="cell" type="button"><span class="val-2">2</span></button>
+                <button class="cell" type="button" aria-label="Row 6, Column 1: 2 adjacent mines"><span class="val-2">2</span></button>
+                <button class="cell" type="button" aria-label="Row 6, Column 2: 2 adjacent mines"><span class="val-2">2</span></button>
+                <button class="cell" type="button" aria-label="Row 6, Column 3: 1 adjacent mine"><span class="val-1">1</span></button>
+                <button class="cell" type="button" aria-label="Row 6, Column 4: empty"><span></span></button>
+                <button class="cell" type="button" aria-label="Row 6, Column 5: empty"><span></span></button>
+                <button class="cell" type="button" aria-label="Row 6, Column 6: empty"><span></span></button>
+                <button class="cell" type="button" aria-label="Row 6, Column 7: 1 adjacent mine"><span class="val-1">1</span></button>
+                <button class="cell" type="button" aria-label="Row 6, Column 8: 2 adjacent mines"><span class="val-2">2</span></button>
+                <button class="cell" type="button" aria-label="Row 6, Column 9: 2 adjacent mines"><span class="val-2">2</span></button>
 
-                <button class="cell mine" type="button"><span>💣</span></button>
-                <button class="cell" type="button"><span class="val-2">2</span></button>
-                <button class="cell" type="button"><span></span></button>
-                <button class="cell" type="button"><span></span></button>
-                <button class="cell" type="button"><span></span></button>
-                <button class="cell" type="button"><span></span></button>
-                <button class="cell" type="button"><span></span></button>
-                <button class="cell" type="button"><span class="val-1">1</span></button>
-                <button class="cell mine" type="button"><span>💣</span></button>
+                <button class="cell mine" type="button" aria-label="Row 7, Column 1: mine"><span>💣</span></button>
+                <button class="cell" type="button" aria-label="Row 7, Column 2: 2 adjacent mines"><span class="val-2">2</span></button>
+                <button class="cell" type="button" aria-label="Row 7, Column 3: empty"><span></span></button>
+                <button class="cell" type="button" aria-label="Row 7, Column 4: empty"><span></span></button>
+                <button class="cell" type="button" aria-label="Row 7, Column 5: empty"><span></span></button>
+                <button class="cell" type="button" aria-label="Row 7, Column 6: empty"><span></span></button>
+                <button class="cell" type="button" aria-label="Row 7, Column 7: empty"><span></span></button>
+                <button class="cell" type="button" aria-label="Row 7, Column 8: 1 adjacent mine"><span class="val-1">1</span></button>
+                <button class="cell mine" type="button" aria-label="Row 7, Column 9: mine"><span>💣</span></button>
 
-                <button class="cell" type="button"><span class="val-3">3</span></button>
-                <button class="cell" type="button"><span class="val-3">3</span></button>
-                <button class="cell" type="button"><span class="val-1">1</span></button>
-                <button class="cell" type="button"><span></span></button>
-                <button class="cell" type="button"><span class="val-1">1</span></button>
-                <button class="cell" type="button"><span class="val-1">1</span></button>
-                <button class="cell" type="button"><span class="val-1">1</span></button>
-                <button class="cell" type="button"><span class="val-1">1</span></button>
-                <button class="cell" type="button"><span class="val-1">1</span></button>
+                <button class="cell" type="button" aria-label="Row 8, Column 1: 3 adjacent mines"><span class="val-3">3</span></button>
+                <button class="cell" type="button" aria-label="Row 8, Column 2: 3 adjacent mines"><span class="val-3">3</span></button>
+                <button class="cell" type="button" aria-label="Row 8, Column 3: 1 adjacent mine"><span class="val-1">1</span></button>
+                <button class="cell" type="button" aria-label="Row 8, Column 4: empty"><span></span></button>
+                <button class="cell" type="button" aria-label="Row 8, Column 5: 1 adjacent mine"><span class="val-1">1</span></button>
+                <button class="cell" type="button" aria-label="Row 8, Column 6: 1 adjacent mine"><span class="val-1">1</span></button>
+                <button class="cell" type="button" aria-label="Row 8, Column 7: 1 adjacent mine"><span class="val-1">1</span></button>
+                <button class="cell" type="button" aria-label="Row 8, Column 8: 1 adjacent mine"><span class="val-1">1</span></button>
+                <button class="cell" type="button" aria-label="Row 8, Column 9: 1 adjacent mine"><span class="val-1">1</span></button>
 
-                <button class="cell mine" type="button"><span>💣</span></button>
-                <button class="cell mine" type="button"><span>💣</span></button>
-                <button class="cell" type="button"><span class="val-1">1</span></button>
-                <button class="cell" type="button"><span></span></button>
-                <button class="cell" type="button"><span class="val-1">1</span></button>
-                <button class="cell mine" type="button"><span>💣</span></button>
-                <button class="cell" type="button"><span class="val-1">1</span></button>
-                <button class="cell" type="button"><span></span></button>
-                <button class="cell" type="button"><span></span></button>
+                <button class="cell mine" type="button" aria-label="Row 9, Column 1: mine"><span>💣</span></button>
+                <button class="cell mine" type="button" aria-label="Row 9, Column 2: mine"><span>💣</span></button>
+                <button class="cell" type="button" aria-label="Row 9, Column 3: 1 adjacent mine"><span class="val-1">1</span></button>
+                <button class="cell" type="button" aria-label="Row 9, Column 4: empty"><span></span></button>
+                <button class="cell" type="button" aria-label="Row 9, Column 5: 1 adjacent mine"><span class="val-1">1</span></button>
+                <button class="cell mine" type="button" aria-label="Row 9, Column 6: mine"><span>💣</span></button>
+                <button class="cell" type="button" aria-label="Row 9, Column 7: 1 adjacent mine"><span class="val-1">1</span></button>
+                <button class="cell" type="button" aria-label="Row 9, Column 8: empty"><span></span></button>
+                <button class="cell" type="button" aria-label="Row 9, Column 9: empty"><span></span></button>
             </div>
         </div>
     </div>
