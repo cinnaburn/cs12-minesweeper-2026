@@ -24,8 +24,8 @@ const GAME_STATUS = {
 
 function createCell() {
     return {
-        type: 'empty',
-        state: 'closed',
+        type: CELL_TYPE.EMPTY,
+        state: CELL_STATE.CLOSED,
         neighborMines: 0,
         exploded: false,
         wrongFlag: false
@@ -98,7 +98,7 @@ function createGame(customConfig = {}) {
         rows: config.rows,
         cols: config.cols,
         minesCount: config.minesCount,
-        status: 'process',
+        status: GAME_STATUS.PROCESS,
         gameTime: 0,
         flagsCount: 0,
         openedCells: 0,
@@ -116,7 +116,7 @@ function createGame(customConfig = {}) {
             clearInterval(gameState.timerId);
             gameState.timerId = null;
         }
-        gameState.status = 'process';
+        gameState.status = GAME_STATUS.PROCESS;
         gameState.gameTime = 0;
         gameState.flagsCount = 0;
         gameState.openedCells = 0;
@@ -144,11 +144,11 @@ function createGame(customConfig = {}) {
         for (let r = 0; r < gameState.rows; r++) {
             for (let c = 0; c < gameState.cols; c++) {
                 const cell = grid[r][c];
-                if (cell.type === 'mine') {
-                    if (cell.state !== 'flagged') {
-                        cell.state = 'opened';
+                if (cell.type === CELL_TYPE.MINE) {
+                    if (cell.state !== CELL_STATE.FLAGGED) {
+                        cell.state = CELL_STATE.OPENED;
                     }
-                } else if (cell.state === 'flagged') {
+                } else if (cell.state === CELL_STATE.FLAGGED) {
                     cell.wrongFlag = true;
                 }
             }
@@ -160,8 +160,8 @@ function createGame(customConfig = {}) {
         for (let r = 0; r < gameState.rows; r++) {
             for (let c = 0; c < gameState.cols; c++) {
                 const cell = grid[r][c];
-                if (cell.type === 'mine' && cell.state !== 'flagged') {
-                    cell.state = 'flagged';
+                if (cell.type === CELL_TYPE.MINE && cell.state !== CELL_STATE.FLAGGED) {
+                    cell.state = CELL_STATE.FLAGGED;
                     gameState.flagsCount++;
                 }
             }
@@ -172,7 +172,7 @@ function createGame(customConfig = {}) {
     function checkWinCondition() {
         const totalSafeCells = (gameState.rows * gameState.cols) - gameState.minesCount;
         if (gameState.openedCells === totalSafeCells) {
-            gameState.status = 'win';
+            gameState.status = GAME_STATUS.WIN;
             if (gameState.timerId) {
                 clearInterval(gameState.timerId);
                 gameState.timerId = null;
@@ -188,14 +188,14 @@ function createGame(customConfig = {}) {
         }
 
         const cell = grid[row][col];
-        if (cell.state === 'opened' || cell.state === 'flagged') {
+        if (cell.state === CELL_STATE.OPENED || cell.state === CELL_STATE.FLAGGED) {
             return;
         }
-        if (cell.type === 'mine') {
+        if (cell.type === CELL_TYPE.MINE) {
             return;
         }
 
-        cell.state = 'opened';
+        cell.state = CELL_STATE.OPENED;
         gameState.openedCells++;
 
         if (cell.neighborMines !== 0) {
@@ -214,7 +214,7 @@ function createGame(customConfig = {}) {
 
 
     function openCell(row, col) {
-        if (gameState.status !== 'process') {
+        if (gameState.status !== GAME_STATUS.PROCESS) {
             return false;
         }
         if (!inBounds(gameState.rows, gameState.cols, row, col)) {
@@ -228,13 +228,13 @@ function createGame(customConfig = {}) {
         }
 
         const cell = grid[row][col];
-        if (cell.state === 'opened' || cell.state === 'flagged') {
+        if (cell.state === CELL_STATE.OPENED || cell.state === CELL_STATE.FLAGGED) {
             return false;
         }
 
-        if (cell.type === 'mine') {
+        if (cell.type === CELL_TYPE.MINE) {
             cell.exploded = true;
-            gameState.status = 'lose';
+            gameState.status = GAME_STATUS.LOSE;
             if (gameState.timerId) {
                 clearInterval(gameState.timerId);
                 gameState.timerId = null;
@@ -250,7 +250,7 @@ function createGame(customConfig = {}) {
 
 
     function toggleFlag(row, col) {
-        if (gameState.status !== 'process') {
+        if (gameState.status !== GAME_STATUS.PROCESS) {
             return false;
         }
         if (!inBounds(gameState.rows, gameState.cols, row, col)) {
@@ -258,18 +258,18 @@ function createGame(customConfig = {}) {
         }
 
         const cell = grid[row][col];
-        if (cell.state === 'opened') {
+        if (cell.state === CELL_STATE.OPENED) {
             return false;
         }
 
-        if (cell.state === 'closed') {
-            cell.state = 'flagged';
+        if (cell.state === CELL_STATE.CLOSED) {
+            cell.state = CELL_STATE.FLAGGED;
             gameState.flagsCount++;
             return true;
         }
 
-        if (cell.state === 'flagged') {
-            cell.state = 'closed';
+        if (cell.state === CELL_STATE.FLAGGED) {
+            cell.state = CELL_STATE.CLOSED;
             gameState.flagsCount--;
             return true;
         }
@@ -279,7 +279,7 @@ function createGame(customConfig = {}) {
 
 
     function tick(seconds = 1) {
-        if (gameState.status !== 'process' || !gameState.started) {
+        if (gameState.status !== GAME_STATUS.PROCESS || !gameState.started) {
             return gameState.gameTime;
         }
 
