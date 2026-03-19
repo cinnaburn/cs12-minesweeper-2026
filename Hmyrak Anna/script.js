@@ -36,12 +36,13 @@ function createCell() {
 function createEmptyGrid(rows, cols) {
     const result = [];
     for (let row = 0; row < rows; row++) {
-    const currentRow = [];
-    for (let col = 0; col < cols; col++) {
-        currentRow.push(createCell());
+        const currentRow = [];
+        for (let col = 0; col < cols; col++) {
+            currentRow.push(createCell());
+        }
+        result.push(currentRow);
     }
-    result.push(currentRow);
-}
+    return result;
 }
 
 
@@ -58,8 +59,8 @@ function placeMines(grid, rows, cols, minesCount, excludeRow, excludeCol) {
         const col = Math.floor(Math.random() * cols);
 
         const isExcluded = Math.abs(row - excludeRow) <= 1 && Math.abs(col - excludeCol) <= 1;
-        if (grid[row][col].type !== 'mine' && !isExcluded) {
-            grid[row][col].type = 'mine';
+        if (grid[row][col].type !== CELL_TYPE.MINE && !isExcluded) {
+            grid[row][col].type = CELL_TYPE.MINE;
             minesPlaced++;
         }
     }
@@ -69,7 +70,7 @@ function placeMines(grid, rows, cols, minesCount, excludeRow, excludeCol) {
 function countNeighbourMines(grid, rows, cols) {
     for (let row = 0; row < rows; row++) {
         for (let col = 0; col < cols; col++) {
-            if (grid[row][col].type === 'mine') {
+            if (grid[row][col].type === CELL_TYPE.MINE) {
                 continue;
             }
 
@@ -80,10 +81,10 @@ function countNeighbourMines(grid, rows, cols) {
                     const neighbourCol = col + directionalCol;
                     if (inBounds(rows, cols, neighbourRow, neighbourCol) &&
                         grid[neighbourRow][neighbourCol].type === CELL_TYPE.MINE) {
-            count++;
-        }
-    }
-}
+                        count++;
+                    }
+                }
+            }
 
             grid[row][col].neighborMines = count;
         }
@@ -222,9 +223,12 @@ function createGame(customConfig = {}) {
         }
 
         if (gameState.firstClick) {
-        gameState.firstClick = false;
-        gameState.started = true;
-        generateField(row, col);
+            gameState.firstClick = false;
+            gameState.started = true;
+            generateField(row, col);
+            gameState.timerId = setInterval(() => {
+                tick();
+            }, 1000);
         }
 
         const cell = grid[row][col];
