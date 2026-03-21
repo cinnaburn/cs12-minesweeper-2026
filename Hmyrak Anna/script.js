@@ -124,11 +124,16 @@ function createGame(customConfig = {}) {
     let grid = createEmptyGrid(gameState.rows, gameState.cols);
 
 
+    function resetGridDerivedState() {
+        gameState.flagsCount = 0;
+        gameState.openedCells = 0;
+    }
+
+
     function resetCellsState() {
         gameState.status = GAME_STATUS.PROCESS;
         gameState.gameTime = 0;
-        gameState.flagsCount = 0;
-        gameState.openedCells = 0;
+        resetGridDerivedState();
         gameState.firstClick = true;
         gameState.started = false;
         grid = createEmptyGrid(gameState.rows, gameState.cols);
@@ -136,8 +141,7 @@ function createGame(customConfig = {}) {
 
 
     function generateField(excludeRow = -1, excludeCol = -1) {
-        gameState.flagsCount = 0;
-        gameState.openedCells = 0;
+        resetGridDerivedState();
         grid = createEmptyGrid(gameState.rows, gameState.cols);
         placeMines(
             grid,
@@ -194,13 +198,13 @@ function createGame(customConfig = {}) {
         stack.push({ row, col });
 
         while (stack.length > 0) {
-            const [curentRow, currentCol] = stack.pop();
+            const { row: currentRow, col: currentCol } = stack.pop();
 
-            if (!inBounds(gameState.rows, gameState.cols, curentRow, currentCol)) {
+            if (!inBounds(gameState.rows, gameState.cols, currentRow, currentCol)) {
                 continue;
             }
 
-            const cell = grid[curentRow][currentCol];
+            const cell = grid[currentRow][currentCol];
             if (cell.state === CELL_STATE.OPENED || cell.state === CELL_STATE.FLAGGED) {
                 continue;
             }
@@ -222,7 +226,7 @@ function createGame(customConfig = {}) {
                         continue;
                     }
                     
-                    const nextRow = curentRow + i;
+                    const nextRow = currentRow + i;
                     const nextCol = currentCol + j;
                     if (inBounds(gameState.rows, gameState.cols, nextRow, nextCol)) {
                         const nextCell = grid[nextRow][nextCol];
