@@ -52,17 +52,30 @@ function inBounds(rows, cols, row, col) {
 
 
 function placeMines(grid, rows, cols, minesCount, excludeRow, excludeCol) {
-    let minesPlaced = 0;
-
-    while (minesPlaced < minesCount) {
-        const row = Math.floor(Math.random() * rows);
-        const col = Math.floor(Math.random() * cols);
-
-        const isExcluded = Math.abs(row - excludeRow) <= 1 && Math.abs(col - excludeCol) <= 1;
-        if (grid[row][col].type !== CELL_TYPE.MINE && !isExcluded) {
-            grid[row][col].type = CELL_TYPE.MINE;
-            minesPlaced++;
+    const allowedPositions = [];
+    for (let row = 0; row < rows; row++) {
+        for (let col = 0; col < cols; col++) {
+            const isInclude = Math.abs(row - excludeRow) <= 1 && Math.abs(col - excludeCol) <= 1;
+            if (!isInclude) {
+                allowedPositions.push({ row, col });
+            }  
         }
+    }
+
+    if (minesCount > allowedPositions.length) {
+        throw new Error('Too many mines for the given field size and first click position.');
+    }
+
+    for (let i = allowedPositions.length - 1; i >= 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        const temp = allowedPositions[i];
+        allowedPositions[i] = allowedPositions[j];
+        allowedPositions[j] = temp;
+    }
+    
+    for (let i = 0; i < minesCount; i++) {
+        const position = allowedPositions[i];
+        grid[position.row][position.col].type = CELL_TYPE.MINE;
     }
 }
 
