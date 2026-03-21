@@ -117,7 +117,8 @@ function createGame(customConfig = {}) {
         flagsCount: 0,
         openedCells: 0,
         firstClick: true,
-        started: false
+        started: false,
+        timerId: null
     };
 
 
@@ -131,34 +132,52 @@ function createGame(customConfig = {}) {
 
 
     function resetCellsState() {
+        if (gameState.timerId !== null) {
+            clearInterval(gameState.timerId);
+        }
         gameState.status = GAME_STATUS.PROCESS;
         gameState.gameTime = 0;
         resetGridDerivedState();
         gameState.firstClick = true;
         gameState.started = false;
+        gameState.timerId = null;
         grid = createEmptyGrid(gameState.rows, gameState.cols);
     }
 
 
-    function generateField(excludeRow = -1, excludeCol = -1) {
+    function startTimer() {
+        if (gameState.timerId !== null) {
+            return;
+        }
+
+        gameState.timerId = setInterval(() => {
+            if (gameState.status !== GAME_STATUS.PROCESS || !gameState.started) {
+                return;
+            }
+            gameState.gameTime++;
+        }, 1000);
+    }
+
+
+    function generateField(rows, cols, minesCount, excludeRow = -1, excludeCol = -1) {
         resetGridDerivedState();
-        grid = createEmptyGrid(gameState.rows, gameState.cols);
+        grid = createEmptyGrid(rows, cols);
         placeMines(
             grid,
-            gameState.rows,
-            gameState.cols,
-            gameState.minesCount,
+            rows,
+            cols,
+            minesCount,
             excludeRow,
             excludeCol
         );
-        countNeighbourMines(grid, gameState.rows, gameState.cols);
+        countNeighbourMines(grid, rows, cols);
     }
 
 
     function revealAllMines() {
-        for (let r = 0; r < gameState.rows; r++) {
-            for (let c = 0; c < gameState.cols; c++) {
-                const cell = grid[r][c];
+        for (let row = 0; row < gameState.rows; row++) {
+            for (let col = 0; col < gameState.cols; col++) {
+                const cell = grid[row][col];
                 if (cell.type === CELL_TYPE.MINE) {
                     if (cell.state !== CELL_STATE.FLAGGED) {
                         cell.state = CELL_STATE.OPENED;
@@ -172,9 +191,9 @@ function createGame(customConfig = {}) {
 
 
     function flagAllMines() {
-        for (let r = 0; r < gameState.rows; r++) {
-            for (let c = 0; c < gameState.cols; c++) {
-                const cell = grid[r][c];
+        for (let row = 0; row < gameState.rows; row++) {
+            for (let col = 0; col < gameState.cols; col++) {
+                const cell = grid[row][col];
                 if (cell.type === CELL_TYPE.MINE && cell.state !== CELL_STATE.FLAGGED) {
                     cell.state = CELL_STATE.FLAGGED;
                     gameState.flagsCount++;
@@ -188,57 +207,45 @@ function createGame(customConfig = {}) {
         const totalSafeCells = (gameState.rows * gameState.cols) - gameState.minesCount;
         if (gameState.openedCells === totalSafeCells) {
             gameState.status = GAME_STATUS.WIN;
+            if (gameState.timerId !== null) {
+                clearInterval(gameState.timerId);
+                gameState.timerId = null;
+            }
             flagAllMines();
         }
     }
 
 
     function floodOpen(row, col) {
-        const stack =[];
-        stack.push({ row, col });
-
-        while (stack.length > 0) {
-            const { row: currentRow, col: currentCol } = stack.pop();
-
-            if (!inBounds(gameState.rows, gameState.cols, currentRow, currentCol)) {
-                continue;
-            }
-
-            const cell = grid[currentRow][currentCol];
-            if (cell.state === CELL_STATE.OPENED || cell.state === CELL_STATE.FLAGGED) {
-                continue;
-            }
-
-            if (cell.type === CELL_TYPE.MINE) {
-                continue;
-            }
-
-            cell.state = CELL_STATE.OPENED;
-            gameState.openedCells++;
-
-            if (cell.neighborMines !== 0) {
-                continue;
-            }
-
-            for (let i = -1; i <= 1; i++) {
-                for (let j = -1; j <= 1; j++) {
-                    if (i === 0 && j === 0) {
-                        continue;
-                    }
-                    
-                    const nextRow = currentRow + i;
-                    const nextCol = currentCol + j;
-                    if (inBounds(gameState.rows, gameState.cols, nextRow, nextCol)) {
-                        const nextCell = grid[nextRow][nextCol];
-                        if (nextCell.state !== CELL_STATE.OPENED && nextCell.state !== CELL_STATE.FLAGGED
-                        && nextCell.type !== CELL_TYPE.MINE) {
-                            stack.push({ row: nextRow, col: nextCol });
-                        }
-                    }
-                }
-            }
+        if (!inBounds(gameState.rows, gameState.cols, row, col)) {
+            return;
         }
 
+        const cell = grid[row][col];
+        if (cell.state === CELL_STATE.OPENED || cell.state === CELL_STATE.FLAGGED) {
+            return;
+        }
+
+        if (cell.type === CELL_TYPE.MINE) {
+            return;
+        }
+
+        cell.state = CELL_STATE.OPENED;
+        gameState.openedCells++;
+
+        if (cell.neighborMines !== 0) {
+            return;
+        }
+
+        for (let directionalRow = -1; directionalRow <= 1; directionalRow++) {
+            for (let directionalCol = -1; directionalCol <= 1; directionalCol++) {
+                if (directionalRow === 0 && directionalCol === 0) {
+                    continue;
+                }
+
+                floodOpen(row + directionalRow, col + directionalCol);
+            }
+        }
     }
 
 
@@ -253,7 +260,8 @@ function createGame(customConfig = {}) {
         if (gameState.firstClick) {
             gameState.firstClick = false;
             gameState.started = true;
-            generateField(row, col);
+            startTimer();
+            generateField(gameState.rows, gameState.cols, gameState.minesCount, row, col);
         }
 
         const cell = grid[row][col];
@@ -264,6 +272,10 @@ function createGame(customConfig = {}) {
         if (cell.type === CELL_TYPE.MINE) {
             cell.exploded = true;
             gameState.status = GAME_STATUS.LOSE;
+            if (gameState.timerId !== null) {
+                clearInterval(gameState.timerId);
+                gameState.timerId = null;
+            }
             revealAllMines();
             return true;
         }
@@ -348,6 +360,7 @@ function createGame(customConfig = {}) {
         initGame,
         openCell,
         toggleFlag,
+        startTimer,
         tick,
         getState,
         getGrid,
