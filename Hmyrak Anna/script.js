@@ -274,6 +274,9 @@ function createGame(customConfig = {}) {
         if (gameState.status !== GAME_STATUS.PROCESS) {
             return false;
         }
+        if (gameState.firstClick) {
+            return false;
+        }
         if (!inBounds(gameState.rows, gameState.cols, row, col)) {
             return false;
         }
