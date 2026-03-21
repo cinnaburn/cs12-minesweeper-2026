@@ -136,6 +136,8 @@ function createGame(customConfig = {}) {
 
 
     function generateField(excludeRow = -1, excludeCol = -1) {
+        gameState.flagsCount = 0;
+        gameState.openedCells = 0;
         grid = createEmptyGrid(gameState.rows, gameState.cols);
         placeMines(
             grid,
@@ -188,33 +190,51 @@ function createGame(customConfig = {}) {
 
 
     function floodOpen(row, col) {
-        if (!inBounds(gameState.rows, gameState.cols, row, col)) {
-            return;
-        }
+        const stack =[];
+        stack.push({ row, col });
 
-        const cell = grid[row][col];
-        if (cell.state === CELL_STATE.OPENED || cell.state === CELL_STATE.FLAGGED) {
-            return;
-        }
-        if (cell.type === CELL_TYPE.MINE) {
-            return;
-        }
+        while (stack.length > 0) {
+            const [curentRow, currentCol] = stack.pop();
 
-        cell.state = CELL_STATE.OPENED;
-        gameState.openedCells++;
+            if (!inBounds(gameState.rows, gameState.cols, curentRow, currentCol)) {
+                continue;
+            }
 
-        if (cell.neighborMines !== 0) {
-            return;
-        }
+            const cell = grid[curentRow][currentCol];
+            if (cell.state === CELL_STATE.OPENED || cell.state === CELL_STATE.FLAGGED) {
+                continue;
+            }
 
-        for (let i = -1; i <= 1; i++) {
-            for (let j = -1; j <= 1; j++) {
-                if (i === 0 && j === 0) {
-                    continue;
+            if (cell.type === CELL_TYPE.MINE) {
+                continue;
+            }
+
+            cell.state = CELL_STATE.OPENED;
+            gameState.openedCells++;
+
+            if (cell.neighborMines !== 0) {
+                continue;
+            }
+
+            for (let i = -1; i <= 1; i++) {
+                for (let j = -1; j <= 1; j++) {
+                    if (i === 0 && j === 0) {
+                        continue;
+                    }
+                    
+                    const nextRow = curentRow + i;
+                    const nextCol = currentCol + j;
+                    if (inBounds(gameState.rows, gameState.cols, nextRow, nextCol)) {
+                        const nextCell = grid[nextRow][nextCol];
+                        if (nextCell.state !== CELL_STATE.OPENED && nextCell.state !== CELL_STATE.FLAGGED
+                        && nextCell.type !== CELL_TYPE.MINE) {
+                            stack.push({ row: nextRow, col: nextCol });
+                        }
+                    }
                 }
-                floodOpen(row + i, col + j);
             }
         }
+
     }
 
 
