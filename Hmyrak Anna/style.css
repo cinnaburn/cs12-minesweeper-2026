@@ -100,6 +100,20 @@ body {
     border-color: var(--border-color-inside);
 }
 
+.face-btn.face-pressed::before{
+    content: '😮';
+}
+
+.face-btn.face-lose::before{
+    content: '😵';
+    background-color: rgb(213, 5, 5);
+}
+
+.face-btn.face-win::before{
+    content: '😎';
+    background-color: rgb(35, 163, 63);
+}
+
 
 .field{
     width: 241px;
