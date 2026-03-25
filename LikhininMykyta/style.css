@@ -128,5 +128,5 @@ a {
     opacity: 0.8;
 }
 .cell[data-mines="1"] { color: blue; }
-.cell[data-mines="2"] { color: green; }
+.cell[data-mines="2"] { color: greenyellow; }
 .cell[data-mines="3"] { color: red; }
